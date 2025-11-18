@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Vieil OS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="pseudo">PyroFetch's Projects</div>
+
+    <div class="desktop">
+        <div class="icon" id="icon-projects">
+            <span class="icon-visual">📁</span>
+            <span class="icon-label">Projects</span>
+        </div>
+    </div>
+
+    <div class="window" id="window-projects" style="top: 50px; left: 100px;">
+        <div class="title-bar">
+            <span>Projects</span>
+            <button class="close-btn" data-window="window-projects">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon" id="icon-ai-gen">
+                <span class="icon-visual">📁</span>
+                <span class="icon-label">AI Image Generation</span>
+            </div>
+            <div class="icon">
+                <span class="icon-visual">📁</span>
+                <span class="icon-label">Games</span>
+            </div>
+            <div class="icon">
+                <span class="icon-visual">📁</span>
+                <span class="icon-label">Files</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="window-ai-gen" style="top: 100px; left: 150px;">
+        <div class="title-bar">
+            <span>AI Image Generation</span>
+            <button class="close-btn" data-window="window-ai-gen">X</button>
+        </div>
+        <div class="window-content">
+            <div class="icon">
+                <span class="icon-visual">📁</span>
+                <span class="icon-label">SDForge Branch</span>
+            </div>
+            <div class="icon" id="icon-instruction-txt">
+                <span class="icon-visual">📄</span>
+                <span class="icon-label">instruction.txt</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="window-notepad" style="top: 150px; left: 200px;">
+        <div class="title-bar">
+            <span>instruction.txt - Notepad</span>
+            <button class="close-btn" data-window="window-notepad">X</button>
+        </div>
+        <div class="window-content notepad-content">
+            <textarea id="notepad-text" readonly></textarea>
+        </div>
+    </div>
+
+
+    <script>
+        // --- 0. Fonction de mise au premier plan ---
+        const allWindows = document.querySelectorAll('.window');
+        
+        function bringToFront(windowElement) {
+            allWindows.forEach(w => w.style.zIndex = '10');
+            windowElement.style.zIndex = '100';
+        }
+
+        // --- 1. Gestion de l'ouverture des fenêtres ---
+        
+        document.getElementById('icon-projects').addEventListener('click', function() {
+            const win = document.getElementById('window-projects');
+            win.style.display = 'block';
+            bringToFront(win);
+        });
+
+        document.getElementById('icon-ai-gen').addEventListener('click', function() {
+            const win = document.getElementById('window-ai-gen');
+            win.style.display = 'block';
+            bringToFront(win);
+        });
+
+        document.getElementById('icon-instruction-txt').addEventListener('click', function() {
+            const notepadWindow = document.getElementById('window-notepad');
+            const notepadText = document.getElementById('notepad-text');
+            
+            fetch('instruction.txt')
+                .then(response => {
+                    if (!response.ok) { throw new Error('Erreur réseau ou fichier.'); }
+                    return response.text();
+                })
+                .then(text => {
+                    notepadText.value = text;
+                    notepadWindow.style.display = 'block';
+                    bringToFront(notepadWindow);
+                })
+                .catch(error => {
+                    console.error('Erreur de fetch:', error);
+                    notepadText.value = "ERREUR : Impossible de charger 'instruction.txt'.\n\n" +
+                                        "Assurez-vous de lancer cette page depuis un serveur web local.";
+                    notepadWindow.style.display = 'block';
+                    bringToFront(notepadWindow);
+                });
+        });
+
+        // --- 2. Gestion de la fermeture des fenêtres ---
+        document.querySelectorAll('.close-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                const windowId = this.getAttribute('data-window');
+                document.getElementById(windowId).style.display = 'none';
+            });
+        });
+
+        // --- 3. Fonction pour rendre les fenêtres déplaçables (Drag and Drop) ---
+        function makeWindowsDraggable() {
+            let activeWindow = null;
+            let offsetX, offsetY;
+
+            // Mettre une fenêtre au premier plan quand on clique dessus
+            allWindows.forEach(win => {
+                win.addEventListener('mousedown', () => {
+                    bringToFront(win);
+                });
+            });
+
+            function dragStart(e) {
+                // On ne glisse que si c'est bien la title-bar
+                if (!e.target.classList.contains('title-bar')) return;
+
+                // *** LA CORRECTION EST ICI ***
+                // 'this' est la title-bar, on veut bouger son parent '.window'
+                activeWindow = this.closest('.window'); 
+                
+                offsetX = e.clientX - activeWindow.offsetLeft;
+                offsetY = e.clientY - activeWindow.offsetTop;
+                
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', dragEnd);
+                
+                activeWindow.classList.add('dragging');
+                e.preventDefault();
+            }
+
+            function dragMove(e) {
+                if (!activeWindow) return;
+                let newX = e.clientX - offsetX;
+                let newY = e.clientY - offsetY;
+                activeWindow.style.left = `${newX}px`;
+                activeWindow.style.top = `${newY}px`;
+            }
+
+            function dragEnd() {
+                if (activeWindow) {
+                    activeWindow.classList.remove('dragging');
+                }
+                activeWindow = null;
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            }
+
+            // Attache le début du drag à chaque title-bar
+            allWindows.forEach(win => {
+                win.querySelector('.title-bar').addEventListener('mousedown', dragStart);
+            });
+        }
+
+        makeWindowsDraggable();
+    </script>
+
+</body>
+</html>

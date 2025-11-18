@@ -1,0 +1,134 @@
+/* Importation d'une police pixelisée pour le look "vieux" */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    background-color: #008080; /* Couleur "teal" classique de Windows 95 */
+    font-family: 'VT323', monospace; /* Police pixel */
+    font-size: 18px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Empêche le défilement du bureau */
+}
+
+.pseudo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #c0c0c0; /* Gris OS */
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff; /* Effet 3D */
+    padding: 5px 10px;
+    font-weight: bold;
+    z-index: 1000; /* Toujours au-dessus */
+}
+
+.desktop {
+    padding: 20px;
+}
+
+/* Style des icônes */
+.icon {
+    width: 100px;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    user-select: none; /* Empêche la sélection du texte de l'icône */
+}
+
+.icon-visual {
+    font-size: 48px; /* Taille des émojis dossier/fichier */
+    display: block;
+}
+
+.icon-label {
+    background: white;
+    padding: 2px 5px;
+    border: 1px dashed transparent;
+    display: inline-block; /* Pour que le fond s'adapte au texte */
+}
+
+.icon:hover .icon-label {
+    background: #000080; /* Bleu foncé de sélection Windows */
+    color: white;
+    border: 1px dashed #ffffff;
+}
+
+/* Style des fenêtres */
+.window {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    width: 450px;
+    min-height: 200px;
+    background: #c0c0c0; /* Gris OS */
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff; /* Effet 3D "sorti" */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.title-bar {
+    background: #000080; /* Bleu titre */
+    color: white;
+    padding: 5px 8px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move; /* Curseu de déplacement */
+    user-select: none; /* Empêche la sélection du titre */
+}
+
+/* Nouvel état 'dragging' */
+.window.dragging {
+    opacity: 0.9;
+    user-select: none; /* Empêche la sélection pendant le drag */
+}
+.window.dragging .window-content {
+    pointer-events: none; /* Désactive les clics sur le contenu pendant le drag */
+}
+
+.close-btn {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.close-btn:active {
+    border-color: #808080 #ffffff #ffffff #808080; /* Effet 3D "enfoncé" */
+}
+
+.window-content {
+    padding: 10px;
+    background: white;
+    margin: 3px;
+    min-height: 150px;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080; /* Effet 3D "creusé" */
+}
+
+/* NOUVEAUX STYLES pour le Notepad */
+.notepad-content {
+    padding: 0; /* Pas de padding pour que le textarea prenne tout l'espace */
+    min-height: 250px; /* Plus haut pour un bloc-notes */
+    display: flex;
+}
+
+#notepad-text {
+    flex-grow: 1; /* Prend tout l'espace disponible */
+    border: none;
+    outline: none;
+    resize: none; /* Empêche l'utilisateur de redimensionner */
+    font-family: 'VT323', monospace; /* Garde la police */
+    font-size: 16px;
+    padding: 5px;
+    background: white;
+    color: black;
+}
