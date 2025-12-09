@@ -1,0 +1,23 @@
+Déterminer la classe de l'IP suivante : 122.53.64.47
+
+Réponse : Classe A
+
+Explication : Le premier octet est 122. La plage de la Classe A va de 1 à 126 (le premier bit est toujours 0).
+
+2) Donner l'adresse réseau de l'IP suivante : 204.30.100.20 /24
+
+Réponse : 204.30.100.0
+
+Explication : Le masque /24 indique que les 3 premiers octets (204.30.100) représentent le réseau. On remplace la partie hôte (.20) par 0.
+
+3) Donner le masque par défaut de la classe C
+
+Réponse : 255.255.255.0
+
+Explication : Une classe C utilise par défaut les 3 premiers octets pour le réseau, ce qui correspond à la notation CIDR /24.
+
+4) L'adresse 10.11.12.13 est-elle privée ou publique ? Expliquer
+
+Réponse : Privée
+
+Explication : Elle appartient à la plage d'adresses privées de Classe A (de 10.0.0.0 à 10.255.255.255), réservée aux réseaux locaux (LAN).

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Louis Herzog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+       :root {
+            --primary-color: #ff9d00;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #6a0c60;
+            --success-color: #2ecc71;
+            --info-color: #17a2b8;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 76px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white;
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Cards pour les outils */
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Section Paramétrage */
+        .params-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .keyword-tag {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            font-weight: 500;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .boolean-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid var(--accent-color);
+            padding: 10px 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Tableau d'historisation */
+        .history-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .badge-ai {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .badge-gpu {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .badge-academic {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .badge-market {
+             background-color: var(--accent-color);
+             color: white;
+        }
+
+        .source-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0 15px;
+            margin-top: 50px;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Louis Herzog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="veille.html">Veille Technologique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="MyProjectSever/index.html">Projets Perso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="PDFViewer3.html">Mes Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Veille Technologique</h1>
+            <p class="lead">Sujet : L'impact de l'IA sur l'évolution matérielle des cartes graphiques (GPU)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="section-title">Étude des outils utilisés</h2>
+            </div>
+            
+            <div class="col-md-4 mb-3">
+                <div class="tool-card">
+                    <i class="bi bi-rss-fill tool-icon"></i>
+                    <h4>Agrégateur de flux</h4>
+                    <p class="text-muted">Feedly</p>
+                    <p>Centralisation des articles de sites spécialisés (Tom's Hardware, Wccftech, The Verge).</p>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">Quotidien</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="tool-card" style="border-left-color: var(--primary-color);">
+                    <i class="bi bi-bell-fill tool-icon" style="color: var(--accent-color);"></i>
+                    <h4>Alertes Automatiques</h4>
+                    <p class="text-muted">Google Alerts</p>
+                    <p>Réception par email des nouvelles indexations sur des termes précis.</p>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">Hebdomadaire</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="tool-card" style="border-left-color: var(--dark-color);">
+                    <i class="bi bi-youtube tool-icon" style="color: #c4302b;"></i>
+                    <h4>Contenu Vidéo & Académique</h4>
+                    <p class="text-muted">YouTube & Google Scholar</p>
+                    <p>Suivi des conférences techniques (GTC, Computex) et publications de recherche.</p>
+                    <div class="mt-2">
+                        <span class="badge bg-secondary">Ponctuel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="params-container">
+            <h3 class="mb-4 text-secondary"><i class="bi bi-sliders me-2"></i>Paramétrage Personnel</h3>
+            <p class="text-muted mb-4">Afin d'assurer la pertinence de la veille, j'ai mis en place des filtres précis utilisant des opérateurs booléens pour exclure le bruit marketing.</p>
+            
+            <div class="row align-items-start">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Requêtes Booléennes (Google Alerts / Feedly) :</h5>
+                    <div class="boolean-box">
+                        ("NVIDIA RTX 50" OR "RDNA 4") AND ("Architecture" OR "Specs") -site:pinterest.com
+                    </div>
+                    <div class="boolean-box mt-2">
+                        "Tensor Cores" AND "Generative AI" AND "Optimization" filetype:pdf
+                    </div>
+                    
+                    <h5 class="mb-3 mt-4">Mots-clés surveillés :</h5>
+                    <div>
+                        <span class="keyword-tag">Blackwell Architecture</span>
+                        <span class="keyword-tag">GDDR7 Memory</span>
+                        <span class="keyword-tag">NPU vs GPU</span>
+                        <span class="keyword-tag">CUDA Optimization</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0 border-start ps-md-4">
+                    <h5 class="mb-3">Critères de sélection :</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Fiabilité :</strong> Vérification croisée (Cross-checking) systématique entre le constructeur et les tests indépendants.</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Technicité :</strong> Priorité aux articles détaillant l'architecture (die size, bus width) plutôt qu'aux annonces de prix.</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Impact Dev :</strong> Focus sur les évolutions impactant les bibliothèques (PyTorch, TensorFlow) et les drivers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">Tableau d'Historisation</h2>
+                <p class="mb-4">Synthèse chronologique des évolutions matérielles et logicielles impactant le marché des GPU.</p>
+                
+                <div class="history-card">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Thème</th>
+                                <th scope="col">Sujet / Titre</th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Outil</th>
+                                <th scope="col">Synthèse</th>
+                                <th scope="col">Lien</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">20/11/2023</td>
+                                <td><span class="badge badge-gpu">Hardware</span></td>
+                                <td>NVIDIA H200 Reveal</td>
+                                <td>NVIDIA News</td>
+                                <td>Feedly</td>
+                                <td class="small">Introduction de la mémoire HBM3e sur l'architecture Hopper. Augmentation critique de la bande passante pour l'inférence des LLMs.</td>
+                                <td><a href="https://nvidianews.nvidia.com/news/nvidia-introduces-h200-tensor-core-gpu-supercharging-generative-ai-and-hpc-workloads" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">15/01/2024</td>
+                                <td><span class="badge badge-gpu">Consumer GPU</span></td>
+                                <td>Lancement RTX 40 Super</td>
+                                <td>Les Numériques</td>
+                                <td>Google Alerts</td>
+                                <td class="small">Mise à jour "Refresh" de la gamme Ada Lovelace. Augmentation des CUDA cores pour un meilleur ratio performance/prix sur les tâches créatives.</td>
+                                <td><a href="https://www.lesnumeriques.com/carte-graphique/geforce-rtx-40-super-nvidia-degaine-ses-nouvelles-cartes-graphiques-pour-la-rentree-n217062.html" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">08/02/2024</td>
+                                <td><span class="badge badge-ai">Software IA</span></td>
+                                <td>Google Gemini Ultra</td>
+                                <td>Google Blog</td>
+                                <td>Feedly</td>
+                                <td class="small">Déploiement du modèle Ultra 1.0. Mise en évidence de la dépendance aux infrastructures TPU v5p pour l'entraînement massif.</td>
+                                <td><a href="https://blog.google/products/gemini/bard-gemini-advanced-ultra/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">18/03/2024</td>
+                                <td><span class="badge badge-gpu">Architecture</span></td>
+                                <td>Conférence GTC 2024 (Blackwell)</td>
+                                <td>YouTube (Official)</td>
+                                <td>YouTube</td>
+                                <td class="small">Présentation de l'architecture Blackwell (B200). Focus total sur l'IA avec une interconnexion NVLink de 5e génération pour unifier la mémoire GPU.</td>
+                                <td><a href="https://www.youtube.com/watch?v=Y2F8yisiS6E" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                             <tr>
+                                <td class="text-nowrap fw-bold text-muted">24/04/2024</td>
+                                <td><span class="badge badge-ai">Dev Tools</span></td>
+                                <td>Sortie PyTorch 2.3</td>
+                                <td>PyTorch.org</td>
+                                <td>Feedly</td>
+                                <td class="small">Support amélioré pour le training distribué et meilleure compatibilité avec les GPU AMD (ROCm), réduisant le monopole CUDA.</td>
+                                <td><a href="https://pytorch.org/blog/pytorch-2-3/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">20/05/2024</td>
+                                <td><span class="badge badge-ai">AI PC</span></td>
+                                <td>Microsoft Copilot+ PC</td>
+                                <td>Microsoft Blog</td>
+                                <td>Google Alerts</td>
+                                <td class="small">Basculement vers une architecture hybride (NPU + GPU). Le traitement IA local décharge le GPU pour les tâches légères, réservant la puissance brute au rendu.</td>
+                                <td><a href="https://blogs.microsoft.com/blog/2024/05/20/introducing-copilot-pcs/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                             <tr>
+                                <td class="text-nowrap fw-bold text-muted">04/06/2024</td>
+                                <td><span class="badge badge-gpu">Architecture</span></td>
+                                <td>Keynote Computex 2024</td>
+                                <td>NVIDIA / AMD</td>
+                                <td>YouTube</td>
+                                <td class="small">Jensen Huang dévoile la roadmap "Rubin" (après Blackwell). Accélération du cycle de renouvellement des GPU IA à un rythme annuel (au lieu de bisannuel).</td>
+                                <td><a href="https://nvidianews.nvidia.com/news/nvidia-ceo-teases-rubin-architecture-unveils-new-ai-platforms-at-computex" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                             <tr>
+                                <td class="text-nowrap fw-bold text-muted">23/07/2024</td>
+                                <td><span class="badge badge-academic">Recherche</span></td>
+                                <td>Llama 3.1 & Optimisation</td>
+                                <td>Meta AI / arXiv</td>
+                                <td>Scholar</td>
+                                <td class="small">Publication du modèle 405B. Impact direct sur la demande en VRAM : nécessite 8x H100 pour l'inférence en FP16, poussant à la quantification 4-bit.</td>
+                                <td><a href="https://ai.meta.com/blog/meta-llama-3-1/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">10/09/2024</td>
+                                <td><span class="badge badge-gpu">Rumeur</span></td>
+                                <td>Specs RTX 5090 (Blackwell)</td>
+                                <td>VideoCardz</td>
+                                <td>X (Twitter)</td>
+                                <td class="small">Fuites crédibles : bus mémoire 512-bit et GDDR7 à 28 Gbps. Une bande passante dépassant 1.5 TB/s, essentielle pour les LLMs locaux.</td>
+                                <td><a href="https://videocardz.com/newz/nvidia-geforce-rtx-5090-rumored-specs-28gb-gddr7-memory-and-448-bit-bus" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">17/10/2025</td>
+                                <td><span class="badge badge-gpu">Production</span></td>
+                                <td>Accélération TSMC 2nm</td>
+                                <td>NotebookCheck</td>
+                                <td>Google Alerts</td>
+                                <td class="small">TSMC confirme l'accélération de la production de masse du process N2. Les gains énergétiques (-30%) sont vitaux pour les futurs clusters IA (ex: Rubin).</td>
+                                <td><a href="https://www.notebookcheck.net/TSMC-accelerates-2-nm-chip-production-and-U-S-expansion-as-the-global-race-for-next-gen-AI-processors-heats-up.1141018.0.html" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">25/11/2025</td>
+                                <td><span class="badge badge-market">Marché</span></td>
+                                <td>Pénurie GDDR7 & RDNA 4</td>
+                                <td>TweakTown / NBCheck</td>
+                                <td>Feedly</td>
+                                <td class="small">La demande prioritaire de HBM pour les serveurs IA crée des tensions sur la production de mémoire graphique, impactant les stocks et prix des GPU grand public.</td>
+                                <td><a href="https://www.notebookcheck.net/Crazy-AMD-RDNA-4-GPU-pricing-on-cards-once-again-as-memory-supply-crunch-takes-its-toll.1180587.0.html" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-nowrap fw-bold text-muted">01/12/2025</td>
+                                <td><span class="badge badge-ai">R&D</span></td>
+                                <td>Démo HBM4E Custom</td>
+                                <td>TechPowerUp</td>
+                                <td>YouTube</td>
+                                <td class="small">Présentation de la mémoire HBM4E soudée directement sur le die logique. Cette fusion permet de briser le "Memory Wall" pour les futurs modèles >1T paramètres.</td>
+                                <td><a href="https://www.techpowerup.com/341044/tsmcs-first-2-nm-node-customers-are-apple-amd-nvidia-and-mediatek-intel-missing" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+                            
+                             <tr>
+                                <td class="text-nowrap fw-bold text-muted">20/12/2025</td>
+                                <td><span class="badge badge-ai">Infrastructure</span></td>
+                                <td>Disponibilité GB200 NVL72/36</td>
+                                <td>NVIDIA Blog</td>
+                                <td>Feedly</td>
+                                <td class="small">Déploiement du système rack-scale NVL72. Il interconnecte non pas 16, mais <strong>72 GPU Blackwell</strong> (ou 36 pour le NVL36) pour agir comme une seule puce géante de 13.5 TB de VRAM.</td>
+                                <td><a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-link-45deg"></i></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="index.html" class="back-to-home text-decoration-none fw-bold" style="color: var(--secondary-color);">
+                <i class="bi bi-arrow-left me-2"></i>Retour à l'accueil
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>PyroFetch Herzog</h3>
+                    <p>Développeur passionné spécialisé en Python, Java et développement web.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2025 PyroFetch Herzog. Tous droits réservés.</p>
+                    <p class="small text-white-50">Dernière mise à jour : 22 décembre 2025</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
